@@ -14,15 +14,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const index_1 = __importDefault(require("../index"));
+const imageFunction_1 = require("../imageFunctions/imageFunction");
+const path_1 = __importDefault(require("path"));
 const request = (0, supertest_1.default)(index_1.default);
 describe("test the image", () => {
     it('should check the front page url', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield request.get('/');
         expect(response.status).toBe(200);
     }));
-    // check for missing query parameters
-    it('checks for missing query parameters', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = request.get('/images');
-        expect(response.status).toBe(400);
+    it('checks file exists', () => __awaiter(void 0, void 0, void 0, function* () {
+        const inputFile = path_1.default.join(__dirname, '../../pictures/secret/imageone.png');
+        const fileExists = yield (0, imageFunction_1.filePresence)(inputFile);
+        expect(fileExists).toBe(true);
     }));
 });

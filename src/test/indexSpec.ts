@@ -10,16 +10,9 @@ describe("test the image", ()=> {
         const response = await request.get('/');
         expect(response.status).toBe(200);
     });
-     // check for missing query parameters
-     it('checks for missing query parameters', async () => {
-        const response = await request.get('/images');
-        expect(response.status).toBe(400);
-      });
+    
 
-      it('should check for valid image parameter', async () => {
-        const response = await request.get('/images?f=imageone&x=png&w=100&h=100');
-        expect(response.status).toBe(400)
-      });
+  
 
       it('checks file exists', async () => {
         const inputFile = path.join(
